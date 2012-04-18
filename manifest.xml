@@ -1,0 +1,11 @@
+<MSDeploy.iisApp>
+
+	<!-- Copies content from path into the destination specified in parameters.xml and marks as an app in IIS 5.1, 6.0 and 7.x -->
+	<iisapp path="dasblogce" />
+
+	<!-- Set NTFS ACLs on the destination specified in parameters.xml -->
+	<setAcl path="dasblogce/content" setAclAccess="Read,Write,Delete" />
+	<setAcl path="dasblogce/logs" setAclAccess="Read,Write,Delete" />
+	<setAcl path="dasblogce/siteconfig" setAclAccess="Read,Write,Delete" />
+
+</MSDeploy.iisApp>

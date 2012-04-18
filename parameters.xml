@@ -1,0 +1,56 @@
+﻿<parameters>
+
+	<!-- Prompts where to copy the content files and takes a web site path (such as "contoso.com/app") -->
+	<parameter name="Application Path" description="Full site path where you would like to install your application (i.e., Default Web Site/dasblog)" defaultValue="Default Web Site/dasblog" tags="iisapp">
+		<parameterEntry type="ProviderPath" scope="iisapp" match="dasblogce" />
+	</parameter>
+
+	<!-- Prompts the user for the URL of the web site so images/css load correctly -->
+	<parameter name="DasBlog Application URL" description="Enter the fully qualified URL to the application (i.e., http://localhost/dasblog/)" defaultValue="http://localhost/DasBlog/">
+		<parameterEntry type="XmlFile" scope="dasblogce\\SiteConfig\\site.config$" match="//MSDeploy:Root/text()" />
+	</parameter>
+
+	<!-- Prompts for blog title -->
+	<parameter name="Blog Title" description="Enter the title of your blog." defaultValue="My DasBlog!">
+		<parameterEntry type="XmlFile" scope="dasblogce\\siteconfig\\site.config" match="//MSDeploy:Title/text()" />
+	</parameter>
+
+	<!-- Prompts for full name -->
+	<parameter name="Full Name" description="Enter the blog owner's full name." defaultValue="Your Name Here">
+		<parameterEntry type="XmlFile" scope="dasblogce\\siteconfig\\site.config" match="//MSDeploy:Copyright/text()" />
+		<parameterEntry type="XmlFile" scope="dasblogce\\siteconfig\\siteSecurity.config" match="//Users/User/DisplayName/text()" />
+	</parameter>
+
+	<!-- Prompts for admin email -->
+	<parameter name="Email Address" description="Enter the blog owner's email address." defaultValue="dasblog@example.com">
+		<parameterEntry type="XmlFile" scope="dasblogce\\siteconfig\\site.config" match="//MSDeploy:Contact/text()" />
+		<parameterEntry type="XmlFile" scope="dasblogce\\siteconfig\\siteSecurity.config" match="//EmailAddress/text()" />
+	</parameter>
+
+	<!-- Prompts for admin user name -->
+	<parameter name="DasBlog Administrator Username" description="Enter the blog administrator username.">
+		<parameterEntry type="XmlFile" scope="dasblogce\\siteconfig\\siteSecurity.config" match="//Users/User/Name/text()" />
+	</parameter>
+
+	<!-- Prompts for admin password -->
+	<parameter name="DasBlog Administrator Password" description="Enter the blog administrator password." tags="New, Password">
+		<parameterEntry type="XmlFile" scope="dasblogce\\siteconfig\\siteSecurity.config" match="//Users/User/Password/text()" />
+	</parameter>
+
+	<!-- This is the parameter that is used to set ACLs, it's set to the application path filled in by the user -->
+	<parameter name="SetAcl1" description="Automatically sets write access for the app" defaultValue="{Application Path}/siteconfig" tags="hidden">
+		<parameterEntry type="ProviderPath" scope="setAcl" match="dasblogce/siteconfig" />
+	</parameter>
+
+	<!-- This is the parameter that is used to set ACLs, it's set to the application path filled in by the user -->
+	<parameter name="SetAcl2" description="Automatically sets write access for the app" defaultValue="{Application Path}/logs" tags="hidden">
+		<parameterEntry type="ProviderPath" scope="setAcl" match="dasblogce/logs" />
+	</parameter>
+
+	<!-- This is the parameter that is used to set ACLs, it's set to the application path filled in by the user -->
+	<parameter name="SetAcl3" description="Automatically sets write access for the app" defaultValue="{Application Path}/content" tags="hidden">
+		<parameterEntry type="ProviderPath" scope="setAcl" match="dasblogce/content" />
+	</parameter>
+
+
+</parameters>
